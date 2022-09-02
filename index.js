@@ -4,9 +4,10 @@ const express = require('express')
 const app = express()
 const port = '3000'
 
-let genero = 'Aventura'
 //escutando a porta 3000
 app.listen(port)
+
+let genero = 'Aventura'
 
 //midlware
 app.use(express.json())
@@ -27,12 +28,6 @@ app.route('/').post((req, res) => {
     res.send(`O ${livro} foi escrito por ${autor}`)
 })
 
-//requisição POST com Body Params
-app.route('/').post((req, res) => res.send(req.body))
-app.route('/').post((req, res) => {
-    const { livro, autor } = req.body
-    res.send(`O ${livro} foi escrito por ${autor}`)
-})
 //requisição PUT
 app.route('/').put((req, res) => {
     genero = req.body
