@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const port = '3000'
 
-let livro = 'O código ...'
+let genero = 'Aventura'
 //escutando a porta 3000
 app.listen(port)
 
@@ -12,15 +12,31 @@ app.listen(port)
 app.use(express.json())
 
 //requisiçao GET
-app.route('/').get((req, res) => res.send(livro))
+app.route('/').get((req, res) => res.send(genero))
 
-//requisição POST
+//requisiçao GET com Route Params
+app.route('/:variavel').get((req, res) => res.send(req.params.variavel))
+app.route('/pagina/:variavel').get((req, res) => res.send(req.params.variavel))
+//requisiçao GET com Query Params
+app.route('/sobre/').get((res, req) => res.send(req.query))
+
+//requisição POST com Body Params
 app.route('/').post((req, res) => res.send(req.body))
+app.route('/').post((req, res) => {
+    const { livro, autor } = req.body
+    res.send(`O ${livro} foi escrito por ${autor}`)
+})
 
+//requisição POST com Body Params
+app.route('/').post((req, res) => res.send(req.body))
+app.route('/').post((req, res) => {
+    const { livro, autor } = req.body
+    res.send(`O ${livro} foi escrito por ${autor}`)
+})
 //requisição PUT
 app.route('/').put((req, res) => {
-    livro = req.body
-    res.send(livro)
+    genero = req.body
+    res.send(genero)
 })
 
 //requisição DELETE
